@@ -1,0 +1,14 @@
+import apiMap from './api'
+import envMap from './env'
+
+const map = {
+  ...apiMap,
+  ...envMap,
+  UPDATE_COM_DATA: 'UPDATE_COM_DATA',
+  UPDATE_MGB_DATA: 'UPDATE_MGB_DATA',
+  UPDATE_DOWNLOAD_BOOK_DATA: 'UPDATE_DOWNLOAD_BOOK_DATA',
+  UPDATE_DOWNLOAD_MANGA_DATA: 'UPDATE_DOWNLOAD_MANGA_DATA',
+  UPDATE_DOWNLOAD_DATA: 'UPDATE_DOWNLOAD_DATA',
+}
+
+export default map
