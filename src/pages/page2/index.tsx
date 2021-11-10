@@ -1,28 +1,26 @@
-import React, { useEffect } from 'react'
-import {
-  BrowserRouter as Router,
-  HashRouter,
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom'
-import $util from '@/util'
 import Page3 from '@/pages/page3'
+import { RouteWithRoutes } from '@/util/routerUtil'
 import { Button } from 'antd'
-const { RouteWithRoutes } = $util
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+// const { RouteWithRoutes } = $util
 // let list: Array<number | string> = [1, 2, 3, 's']
 function Index(props: any) {
+  console.log('进入页面2', props)
+  const [count, setcount] = useState(0)
   useEffect(() => {
-    console.log('进入页面2')
   }, [])
   return (
     <div>
-      页面2<br></br>
-      <Link to={props.match.path + '/page3'}>page315</Link>
-      <Link to={props.match.path + '/page4'}>page4</Link>
+      页面2
+      <p>
+        <button onClick={() => setcount(count + 1)}>{count}</button>
+      </p>
+      <Link to={props.routePath + '/page3'}>page315</Link>
+      <Link to={props.routePath + '/page4'}>page4</Link>
       <Page3 abc={555} def={'这是字符串的呢'} />
       <Button>牛逼</Button>
-      <RouteWithRoutes routes={props.routes} comProps={{ abc: 'asdffg' }} page3Props={{ def: '哪里' }} />
+      <RouteWithRoutes routes={props.routes} comProps={{ abc: 'asdffg' }} page3Props={{ def: count }} />
       {/* <Switch>
         {props.routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
@@ -32,4 +30,4 @@ function Index(props: any) {
   )
 }
 
-export default Index
+export default (Index)

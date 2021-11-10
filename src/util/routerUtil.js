@@ -1,11 +1,11 @@
 import React from 'react'
 import {
+  // Link,
+  Redirect,
+  Route,
   // BrowserRouter as Router,
   // HashRouter,
   Switch,
-  Route,
-  // Link,
-  Redirect,
 } from 'react-router-dom'
 function getIdByLastItem(str = '') {
   let id = str.split('/').filter((it) => it)
@@ -19,7 +19,8 @@ function RouteWithSubRoutes(route) {
       path={route.path}
       render={(props) => {
         let mprops = {
-          ...props,
+          // ...route,
+          routePath: route.path,
           ...route.extendRrops,
         }
         if (route.auth && route.auth(mprops)) {
@@ -73,11 +74,4 @@ function routerPathTrans(data, path = '') {
   })
 }
 
-const map = {
-  RouteWithSubRoutes,
-  beforeEach,
-  RouteWithRoutes,
-  routerPathTrans,
-}
-
-export default map
+export { RouteWithSubRoutes, beforeEach, RouteWithRoutes, routerPathTrans }

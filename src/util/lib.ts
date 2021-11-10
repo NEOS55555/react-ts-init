@@ -1,5 +1,4 @@
-const libMap = {
-  mapping() {
+  export function mapping() {
     const map = {}
     function set(args: Array<string>, val: any) {
       // args = args.slice()
@@ -38,9 +37,9 @@ const libMap = {
       get,
       del,
     }
-  },
+  }
 
-  addHttp(url:string, ref:string = 'http:', isAbs:boolean) {
+  export function addHttp(url:string, ref:string = 'http:', isAbs:boolean) {
     if (!url) {
       return ''
     }
@@ -49,8 +48,8 @@ const libMap = {
       return ref + url
     }
     return url
-  },
-  execFnloop(fn: Function, count:number = 0) {
+  }
+  export function execFnloop(fn: Function, count:number = 0) {
     ;(function intor(icount) {
       fn &&
         fn(
@@ -59,8 +58,8 @@ const libMap = {
           () => intor(icount)
         )
     })(count)
-  },
-  getBase64(file:File) {
+  }
+  export function getBase64(file:File) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
       if (!file) {
@@ -70,8 +69,8 @@ const libMap = {
       reader.onload = () => resolve(reader.result)
       reader.onerror = (error) => reject(error)
     })
-  },
-  throttle(func=Function, wait:number=500) {
+  }
+  export function throttle(func=Function, wait:number=500) {
     var timeout:any = null, context:any = null, args:any = null
     var previous = 0
 
@@ -104,9 +103,9 @@ const libMap = {
       timeout = null
     }
     return throttled
-  },
+  }
   // 防抖
-  debounce(lastCb:Function, timeout = 500, firstCb:Function) {
+  export function debounce(lastCb:Function, timeout = 500, firstCb:Function) {
     let isFristEval = false
     let timmer:any = null
     function gomov() {
@@ -125,13 +124,11 @@ const libMap = {
     }
 
     return gomov
-  },
-  getRand(a:number, b:number) {
+  }
+  export function getRand(a:number, b:number) {
     return Math.floor(Math.random() * (b - a) + a)
-  },
-  isBlankObj(obj = {}) {
+  }
+  export function isBlankObj(obj = {}) {
     return Object.keys(obj).length === 0
-  },
-}
+  }
 
-export default libMap

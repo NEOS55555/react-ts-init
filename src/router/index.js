@@ -1,14 +1,14 @@
-import React from 'react'
 import Page1 from '@/pages/page1'
 import Page2 from '@/pages/page2'
 import Page3 from '@/pages/page3'
 import Page4 from '@/pages/page4'
+import { eventBus } from '@/util/eventBus'
+import { routerPathTrans } from '@/util/routerUtil'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-import $util from '@/util'
-
 // export const routeGuard
-
+eventBus.on('abc')
 const routes = [
   {
     path: '/page1',
@@ -50,9 +50,6 @@ const routes = [
     ],
   },
 ]
-$util.routerPathTrans(routes)
-const routerMap = {
-  routes,
-}
+routerPathTrans(routes)
 
-export default routerMap
+export { routes }

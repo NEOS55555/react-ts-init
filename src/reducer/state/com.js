@@ -1,5 +1,6 @@
-import $const from '@/constant'
 // import { menuList } from '@/constant'
+
+import { UPDATE_COM_DATA } from '@/constant'
 
 const initState = {
   // 查看的是哪个列表
@@ -10,7 +11,7 @@ const initState = {
 }
 const comState = (state = initState, { type, data }) => {
   switch (type) {
-    case $const.UPDATE_COM_DATA:
+    case UPDATE_COM_DATA:
       return {
         ...state,
         ...data,

@@ -1,12 +1,11 @@
+import { CONFIG, HTTP } from '@/constant/api'
+import { eventBus } from '@/util/eventBus'
 import axiosOri from 'axios'
-import $const from '@/constant'
-import $util from '@/util'
-
 // const { API_URL } = comConstant
 // console.log(CONFIG.BASEURL)
 const axios = axiosOri.create({
   // baseURL: CONFIG.BASEURL,
-  timeout: $const.CONFIG.TIMEOUT,
+  timeout: CONFIG.TIMEOUT,
   // headers: { 'X-Custom-Header': 'foobar' },
 })
 
@@ -24,11 +23,11 @@ axios.interceptors.request.use(
 
 function dealResCode(status) {
   switch (status) {
-    case $const.HTTP.CODE_401:
+    case HTTP.CODE_401:
       console.log('重新登陆')
-      $util.eventBus.emit('history#login')
+      eventBus.emit('history#login')
       return false
-    case $const.HTTP.CODE_200:
+    case HTTP.CODE_200:
       return true
     default:
       return true
@@ -61,11 +60,11 @@ axios.interceptors.response.use(
 const pstMethods = ['post', 'put', 'delete']
 const methods = ['get', 'patch', ...pstMethods]
 
-const apiAxios = {}
+const aAxios = {}
 
 methods.forEach((method) => {
-  const isPst = pstMethods.indexOf(method) != -1
-  apiAxios[method] = (url, obj = {}) => {
+  const isPst = pstMethods.indexOf(method) !== -1
+  aAxios[method] = (url, obj = {}) => {
     let { params, config = {}, lazyput } = obj
     // console.log(params)
     url = url.replace(/(:[a-zA-z0-9]+)/gi, function (sep) {
@@ -81,9 +80,9 @@ methods.forEach((method) => {
   }
 })
 
-apiAxios.send = function (url, obj) {
+aAxios.send = function (url, obj) {
   obj.lazyput = obj.lazyput == null ? url.lazyput : obj.lazyput
   this[url.method](url.path, obj)
 }
 
-export default apiAxios
+export default aAxios

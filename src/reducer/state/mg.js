@@ -1,18 +1,8 @@
 import { UPDATE_MGB_DATA } from '@/constant'
 
-function getDefaultState() {
-  return {
-    search: '',
-    list: [],
-    pageIndex: 1,
-    total: 0,
-    isNeedRecommend: true,
-  }
-}
-
 const initState = {}
 
-export default (state = initState, { type, data }) => {
+const mgState = (state = initState, { type, data }) => {
   switch (type) {
     case UPDATE_MGB_DATA:
       return {
@@ -26,3 +16,4 @@ export default (state = initState, { type, data }) => {
       return state
   }
 }
+export default mgState

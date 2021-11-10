@@ -8,8 +8,5 @@ const CONFIG = {
   RESPONSE_CODE: 'responseCode',
   TIMEOUT: 15000,
 }
-const map = {
-  HTTP,
-  CONFIG,
-}
-export default map
+
+export { HTTP, CONFIG }

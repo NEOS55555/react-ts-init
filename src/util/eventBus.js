@@ -34,4 +34,4 @@ EventBus.prototype.off = EventBus.prototype.remove
 
 const eventBus = new EventBus()
 
-export default eventBus
+export { eventBus }

@@ -1,12 +1,12 @@
+// import router from '@/router'
+import { routes } from '@/router'
+import { eventBus } from '@/util/eventBus'
+import { RouteWithRoutes } from '@/util/routerUtil'
+import 'antd/dist/antd.css'
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import 'antd/dist/antd.css'
 import './App.scss'
-import $util from '@/util'
 import Com from './com'
-import router from '@/router'
-
-const { RouteWithRoutes } = $util
 
 console.log(process.env)
 const dd = process.env
@@ -16,7 +16,7 @@ class App extends Component {
   }
   componentDidMount() {
     console.log('ffffffffffff', this.props)
-    $util.eventBus.on('history#login', () => {
+    eventBus.on('history#login', () => {
       this.props.history.push('/login')
     })
     this.setState({
@@ -41,7 +41,7 @@ class App extends Component {
         </ul>
         <div>{JSON.stringify(dd)}</div>
 
-        <RouteWithRoutes routes={router.routes} abcdef="adfs" />
+        <RouteWithRoutes routes={routes} abcdef="adfs" />
       </>
     )
   }
