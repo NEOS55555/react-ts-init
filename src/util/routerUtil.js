@@ -10,6 +10,9 @@ import {
 function getIdByLastItem(str = '') {
   let id = str.split('/').filter((it) => it)
   // console.log(id)
+  if (id.length == 0) {
+    return 'id'
+  }
   id = id[id.length - 1].trim()
   return id
 }
@@ -33,7 +36,7 @@ function RouteWithSubRoutes(route) {
   )
 }
 
-function RouteWithRoutes({ routes, comProps = {}, ...props }) {
+function RouteWithRoutes({ routes = [], comProps = {}, ...props }) {
   console.log(routes)
 
   return (
