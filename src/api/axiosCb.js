@@ -13,6 +13,9 @@ const axios = axiosOri.create({
 axios.interceptors.request.use(
   (config) => {
     // loading().transShow()
+    // console.log('config', config)
+    config.headers = config.headers || {}
+    config.headers.token = localStorage.getItem('token')
     return config
   },
   (err) => {
@@ -25,7 +28,8 @@ function dealResCode(status) {
   switch (status) {
     case HTTP.CODE_401:
       console.log('重新登陆')
-      eventBus.emit('history#login')
+      localStorage.removeItem('token')
+      eventBus.emit('pushState#history', '/login')
       return false
     case HTTP.CODE_200:
       return true
@@ -50,8 +54,10 @@ axios.interceptors.response.use(
   function (err, a) {
     console.log(err, a)
     console.log(err.response)
-    const { status } = err.response
-    dealResCode(status)
+    if (err.response) {
+      const { status } = err.response
+      dealResCode(status)
+    }
 
     return Promise.reject(err)
   }
@@ -66,23 +72,24 @@ methods.forEach((method) => {
   const isPst = pstMethods.indexOf(method) !== -1
   aAxios[method] = (url, obj = {}) => {
     let { params, config = {}, lazyput } = obj
-    // console.log(params)
+    console.log(params)
     url = url.replace(/(:[a-zA-z0-9]+)/gi, function (sep) {
       const param = params[sep.slice(1)]
       if (!lazyput) {
         delete params[sep.slice(1)]
       }
-      return param
+      return param || sep
     })
+    console.log('--', params)
     params = isPst ? params : { params, ...config }
-    // console.log('url:', url, params, config)
+    console.log('url:', url, params, config)
     return axios[method](url, params, config)
   }
 })
 
 aAxios.send = function (url, obj) {
   obj.lazyput = obj.lazyput == null ? url.lazyput : obj.lazyput
-  this[url.method](url.path, obj)
+  return this[url.method](url.path, obj)
 }
 
 export default aAxios

@@ -1,7 +1,7 @@
 import { isDev } from '@/constant/env'
 import apiMap from './apiMap'
 import axiosCb from './axiosCb'
-
+const locationHostname = window.location.hostname
 // 检测一遍
 if (isDev) {
   const item = Object.keys(apiMap).find(
@@ -16,18 +16,22 @@ function send(url, config = {}) {
   if (isDev) {
     path = (url.proxy || process.env.REACT_APP_PROXY_API || '') + path
   }
-  path = (url.proxyHost || '') + path
+  path =
+    (url.proxyHost ||
+      (process.env.REACT_APP_PROXY_HOST || '').replace(
+        'localhost',
+        locationHostname
+      )) + path
   return axiosCb.send({ ...url, path }, config)
 }
 const apiAxiosSend = {}
 for (let key in apiMap) {
   const apiItem = apiMap[key]
-  apiAxiosSend[key] = function (...args) {
-    send(apiItem, ...args)
+  apiAxiosSend[key] = function (config) {
+    return send(apiItem, config)
   }
 }
 const apiAxios = {
-  ...axiosCb,
   send,
   ...apiAxiosSend,
 }

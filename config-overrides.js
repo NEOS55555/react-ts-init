@@ -11,6 +11,7 @@ module.exports = function (config, env) {
   config.resolve.alias = {
     '@': path.resolve('src'),
   }
+  config.output.publicPath = './'
   config.module.rules.forEach((rr) => {
     // console.log(rr)
     if (rr.oneOf) {
