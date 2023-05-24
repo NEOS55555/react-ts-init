@@ -1,0 +1,1 @@
+window.GLOBAL_WEB_SETTING = {}

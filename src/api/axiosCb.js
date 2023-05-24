@@ -80,9 +80,9 @@ methods.forEach((method) => {
       }
       return param || sep
     })
-    console.log('--', params)
+    // console.log('--', params)
     params = isPst ? params : { params, ...config }
-    console.log('url:', url, params, config)
+    // console.log('url:', url, params, config)
     return axios[method](url, params, config)
   }
 })

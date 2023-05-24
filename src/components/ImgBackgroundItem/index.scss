@@ -1,0 +1,29 @@
+.img-background-item {
+  position: absolute;
+  /* .img-bg {
+    width: 100%;
+  } */
+  &.isInBack {
+    .img-bg {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  &.imgRevers {
+    .img-bg {
+      transform: rotateY(180deg);
+    }
+  }
+  &.imgReversX {
+    .img-bg {
+      transform: rotateX(180deg);
+    }
+  }
+  .img-background-item-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

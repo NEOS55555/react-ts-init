@@ -1,0 +1,8 @@
+.danmu-item {
+  position: fixed;
+  left: 100%;
+  &.isshow {
+    left: var(--left);
+  }
+  white-space: nowrap;
+}

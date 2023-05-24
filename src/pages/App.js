@@ -6,6 +6,7 @@ import 'antd/dist/antd.css'
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import './App.scss'
+import 'swiper/swiper.scss'
 import Com from './com'
 
 console.log(process.env)
@@ -30,7 +31,7 @@ class App extends Component {
   render() {
     return (
       <>
-        {this.state.initval && <Com initval={this.state.initval} />}
+        {/* {this.state.initval && <Com initval={this.state.initval} />} */}
         <ul>
           <li>
             <Link to="/page1">page1</Link>
